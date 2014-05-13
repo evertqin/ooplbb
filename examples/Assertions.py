@@ -5,12 +5,12 @@
 # -------------
 
 """
-Turn OFF assertions at run time with -O.
-% python -O Assertions.py
+Turn OFF assert ions at run time with -O.
+% python -O assertions.py
 """
 
 def cycle_length (n) :
-    assert(n > 0)
+    assert n > 0
     c = 0
     while n > 1 :
         if (n % 2) == 0 :
@@ -18,22 +18,22 @@ def cycle_length (n) :
         else :
             n = (3 * n) + 1
         c += 1
-    assert(c > 0)
+    assert c > 0
     return c
 
-print("Assertions.py")
+print("assert ions.py")
 
-assert(cycle_length(1) == 1)
-assert(cycle_length(5) == 6)
+assert cycle_length(1) == 1
+assert cycle_length(5) == 6
 
 print("Done.")
 
 """
-Assertions.py
+assert ions.py
 Traceback (most recent call last):
-  File "./Assertions.py", line 26, in <module>
-    assert(cycle_length(1) == 1)
-  File "./Assertions.py", line 23, in cycle_length
-    assert(c > 0)
-AssertionError
+  File "./assert ions.py", line 26, in <module>
+    assert cycle_length(1) == 1
+  File "./assert ions.py", line 23, in cycle_length
+    assert c > 0
+assert ionError
 """

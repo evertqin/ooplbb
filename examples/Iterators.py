@@ -73,25 +73,25 @@ def test (c) :
     x.append(2)
     x.append(3)
 
-    assert(hasattr(x, "__len__"))
-    assert(x.__len__() == 2)
-    assert(len(x)      == 2)
+    assert hasattr(x, "__len__")
+    assert x.__len__() == 2
+    assert len(x)      == 2
 
-    assert(hasattr(x, "__getitem__"))
-    assert(x.__getitem__(1) == 3)
-    assert(x[1]             == 3)
+    assert hasattr(x, "__getitem__")
+    assert x.__getitem__(1) == 3
+    assert x[1]             == 3
 
-    assert(hasattr(x, "__iter__"))
+    assert hasattr(x, "__iter__")
     i = x.__iter__()
     i = iter(x)
 
-    assert(i is iter(i))
-    assert(next(i) == 2)
-    assert(next(i) == 3)
+    assert i is iter(i)
+    assert next(i) == 2
+    assert next(i) == 3
 
     try :
-        assert(next(i) == 4)
-        assert(False)
+        assert next(i) == 4
+        assert False
     except StopIteration :
         pass
 

@@ -128,20 +128,20 @@ class Customer (object) :
         return result
 
 x = Customer("Penelope")
-assert(x.statement() ==                     \
+assert (x.statement() ==                     \
     "Rental Record for Penelope\n"        + \
     "Amount owed is 0\n"                  + \
     "You earned 0 frequent renter points")
 
 x.add_rental(Rental(Movie("Shane", RegularPrice()), 2))
-assert(x.statement() ==                     \
+assert (x.statement() ==                     \
     "Rental Record for Penelope\n"        + \
     "\tShane\t2\n"                        + \
     "Amount owed is 2\n"                  + \
     "You earned 1 frequent renter points")
 
 x.add_rental(Rental(Movie("Red River", RegularPrice()), 5))
-assert(x.statement() ==                     \
+assert (x.statement() ==                     \
     "Rental Record for Penelope\n"        + \
     "\tShane\t2\n"                        + \
     "\tRed River\t6.5\n"                  + \
@@ -149,7 +149,7 @@ assert(x.statement() ==                     \
     "You earned 2 frequent renter points")
 
 x.add_rental(Rental(Movie("Giant", NewReleasePrice()), 1))
-assert(x.statement() ==                     \
+assert (x.statement() ==                     \
     "Rental Record for Penelope\n"        + \
     "\tShane\t2\n"                        + \
     "\tRed River\t6.5\n"                  + \
@@ -158,7 +158,7 @@ assert(x.statement() ==                     \
     "You earned 3 frequent renter points")
 
 x.add_rental(Rental(Movie("2001", NewReleasePrice()), 3))
-assert(x.statement() ==                     \
+assert (x.statement() ==                     \
     "Rental Record for Penelope\n"        + \
     "\tShane\t2\n"                        + \
     "\tRed River\t6.5\n"                  + \
@@ -168,7 +168,7 @@ assert(x.statement() ==                     \
     "You earned 5 frequent renter points")
 
 x.add_rental(Rental(Movie("Big Country", ChildrensPrice()), 3))
-assert(x.statement() ==                     \
+assert (x.statement() ==                     \
     "Rental Record for Penelope\n"        + \
     "\tShane\t2\n"                        + \
     "\tRed River\t6.5\n"                  + \
@@ -179,7 +179,7 @@ assert(x.statement() ==                     \
     "You earned 6 frequent renter points")
 
 x.add_rental(Rental(Movie("Spartacus", ChildrensPrice()), 5))
-assert(x.statement() ==                     \
+assert (x.statement() ==                     \
     "Rental Record for Penelope\n"        + \
     "\tShane\t2\n"                        + \
     "\tRed River\t6.5\n"                  + \

@@ -17,15 +17,15 @@ class A :
         self.a.append(v)
 
 x = A()
-assert(x.get() == [])
+assert x.get() == []
 x.add(2)
-assert(x.get() == [2])
+assert x.get() == [2]
 x.add(3)
-assert(x.get() == [2, 3])
-x.a[0] = 4
-assert(x.get() == [4, 3])
-x.a = "gone"
-assert(x.get() == "gone")
+assert x.get() == [2, 3]
+x.a += [4]                  # violation of interface
+assert x.get() == [2, 3, 4]
+x.a = None                  # violation of interface
+assert x.get() == None
 
 def A () :
     a = []
@@ -40,14 +40,14 @@ def A () :
     return B()
 
 x = A()
-assert(x.get() == [])
+assert x.get() == []
 x.add(2)
-assert(x.get() == [2])
+assert x.get() == [2]
 x.add(3)
-assert(x.get() == [2, 3])
-#x.a[0] = 4               # AttributeError: 'A' object has no attribute 'a'
-assert(x.get() == [2, 3])
-x.a = "gone"              # ?
-assert(x.get() == [2, 3])
+assert x.get() == [2, 3]
+#x.a += [4]              # AttributeError: 'A' object has no attribute 'a'
+assert x.get() == [2, 3]
+x.a = None               # ?
+assert x.get() == [2, 3]
 
 print("Done.")

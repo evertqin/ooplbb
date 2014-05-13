@@ -42,9 +42,9 @@ x4   = Cons(4, x)
 x34  = Cons(3, x4)
 x234 = Cons(2, x34)
 
-assert(x.length()    == 0)
-assert(x4.length()   == 1)
-assert(x34.length()  == 2)
-assert(x234.length() == 3)
+assert x.length()    == 0
+assert x4.length()   == 1
+assert x34.length()  == 2
+assert x234.length() == 3
 
 print "Done."
