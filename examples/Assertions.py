@@ -5,7 +5,7 @@
 # -------------
 
 """
-Turn OFF assert ions at run time with -O.
+Turn OFF assertions at run time with -O.
 % python -O assertions.py
 """
 
@@ -21,7 +21,7 @@ def cycle_length (n) :
     assert c > 0
     return c
 
-print("assert ions.py")
+print("Assertions.py")
 
 assert cycle_length( 1) == 1
 assert cycle_length( 5) == 6
@@ -30,11 +30,11 @@ assert cycle_length(10) == 7
 print("Done.")
 
 """
-assert ions.py
+Assertions.py
 Traceback (most recent call last):
-  File "./assert ions.py", line 26, in <module>
-    assert cycle_length(1) == 1
-  File "./assert ions.py", line 23, in cycle_length
+  File "./Assertions.py", line 26, in <module>
+    assert cycle_length( 1) == 1
+  File "./Assertions.py", line 21, in cycle_length
     assert c > 0
-assert ionError
+AssertionError
 """

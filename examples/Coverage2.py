@@ -4,33 +4,41 @@
 # Coverage2.py
 # ------------
 
-def test (b, c) :
-    if b :
-        if c :
-            print("b is true and c is true")
+from unittest import main, TestCase
+
+def cycle_length (n) :
+    assert n > 0
+    c = 1
+    while n > 1 :
+        if (n % 2) == 0 :
+            n = (n / 2)
         else :
-            print("b is true and c is false")
-    elif c :
-        print("b is false and c is true")
-    else :
-        print("b is false and c is false")
+            n = (3 * n) + 1
+        c += 1
+    assert c > 0
+    return c
 
-print("Coverage.py")
+class UnitTests (TestCase) :
+    def test_1 (self) :
+        self.assertEqual(cycle_length( 1), 1)
 
-test(False, False)
-test(False, True)
+    def test_2 (self) :
+        self.assertEqual(cycle_length( 2), 2)
 
-print("Done.")
+main()
 
 """
 % coverage run --branch Coverage2.py
-Coverage.py
-b is false and c is false
-b is false and c is true
-Done.
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
 
-% coverage report
-Name        Stmts   Miss Branch BrMiss  Cover
----------------------------------------------
-Coverage2      12      3      6      3    67%
+OK
+
+
+
+% coverage report -m
+Name        Stmts   Miss Branch BrMiss  Cover   Missing
+-------------------------------------------------------
+Coverage2      18      2      4      1    86%   16, 30
 """
