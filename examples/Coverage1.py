@@ -81,7 +81,7 @@ Options:
 
 
 
-% coverage report run
+% coverage help report
 Usage: coverage report [options] [modules]
 
 Report coverage statistics on modules.
