@@ -71,7 +71,7 @@ class Rental {
     public double getCharge () { // const
         return _movie.getCharge(_daysRented);}
 
-    public int getDaysRented () { // const // not used
+    public int getDaysRented () { // const // no longer used
         return _daysRented;}
 
     /**

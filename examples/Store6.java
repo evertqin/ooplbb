@@ -84,7 +84,7 @@ class Movie {
      * _price
      *     getPriceCode()
      */
-    public int getPriceCode () { // const // not needed
+    public int getPriceCode () { // const
         return _price.getPriceCode();}
 
     public String getTitle () { // const
@@ -119,7 +119,7 @@ class Rental {
     public double getCharge () { // const
         return _movie.getCharge(_daysRented);}
 
-    public int getDaysRented () { // const // not used
+    public int getDaysRented () { // const // no longer used
         return _daysRented;}
 
     /**

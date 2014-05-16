@@ -66,7 +66,7 @@ class Rental {
                 break;}
         return result;}
 
-    public int getDaysRented () { // const // not needed
+    public int getDaysRented () { // const
         return _daysRented;}
 
     /**

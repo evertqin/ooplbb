@@ -2,38 +2,70 @@
 // Decorator.java
 // --------------
 
-interface Drawable {
-    public String draw ();}
+interface PizzaInterface {
+	int getCost ();}
 
-class Window implements Drawable {
-    public String draw () {
-        return "Window.draw()";}}
+class Pizza implements PizzaInterface {
+    public final int getCost () {
+        return 7;}
 
-class DrawableDecorator implements Drawable {
-    private Drawable _d;
-    private String   _s;
+	public final String toString () {
+		return "Pizza";}}
 
-    public DrawableDecorator (Drawable d, String s) {
-        _d = d;
-        _s = s;}
+abstract class AbstractPizzaDecorator implements PizzaInterface {
+    protected PizzaInterface _p;
 
-    public String draw () {
-        return _s + " " + _d.draw();}}
+    public AbstractPizzaDecorator (PizzaInterface p) {
+        _p = p;}}
+
+class CheesePizzaDecorator extends AbstractPizzaDecorator {
+	public CheesePizzaDecorator (PizzaInterface p) {
+		super(p);}
+
+	public final int getCost () {
+		return _p.getCost() + 1;}
+
+	@Override
+	public final String toString () {
+		return "Cheese " + _p.toString();}}
+
+class SausagePizzaDecorator extends AbstractPizzaDecorator {
+	public SausagePizzaDecorator (PizzaInterface p) {
+		super(p);}
+
+	public final int getCost () {
+		return _p.getCost() + 2;}
+
+	@Override
+	public final String toString () {
+		return "Sausage " + _p.toString();}}
 
 final class Decorator {
     public static void main (String[] args) {
         System.out.println("Decorator.java");
 
-        Drawable w = new Window();
-        assert w.draw() == "Window.draw()";
+		{
+        PizzaInterface p = new Pizza();
+        assert p.getCost() == 7;
+        assert p.toString().equals("Pizza");
+		}
 
-        w = new DrawableDecorator(w, "Decoration1");
-        assert w.draw().equals("Decoration1 Window.draw()");
+		{
+        PizzaInterface p = new CheesePizzaDecorator(new Pizza());
+        assert p.getCost() == 8;
+        assert p.toString().equals("Cheese Pizza");
+		}
 
-        w = new DrawableDecorator(w, "Decoration2");
-        assert w.draw().equals("Decoration2 Decoration1 Window.draw()");
+		{
+        PizzaInterface p = new CheesePizzaDecorator(new SausagePizzaDecorator(new Pizza()));
+        assert p.getCost() == 10;
+        assert p.toString().equals("Cheese Sausage Pizza");
+		}
 
-        w = new DrawableDecorator(w, "Decoration3");
-        assert w.draw().equals("Decoration3 Decoration2 Decoration1 Window.draw()");
+		{
+        PizzaInterface p = new CheesePizzaDecorator(new SausagePizzaDecorator(new CheesePizzaDecorator(new Pizza())));
+        assert p.getCost() == 11;
+        assert p.toString().equals("Cheese Sausage Cheese Pizza");
+		}
 
         System.out.println("Done.");}}

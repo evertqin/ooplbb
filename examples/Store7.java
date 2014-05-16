@@ -4,6 +4,10 @@
 
 /*
 Replace Type Code with State/Strategy (227)
+Remove Price.getPriceCode()
+Change Movie.Movie() to take a Price instead of a price code
+Remove Move.getPriceCode()
+Rename Move.setPriceCode() to Movie.setPrice()
 Move Method(142)
 Replace Conditional with Polymorphism (225)
 Create Price
@@ -18,8 +22,7 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 abstract class Price {
-    abstract double getCharge    (int daysRented);
-    abstract Price  getPriceCode ();               // not used
+    abstract double getCharge (int daysRented);
 
     public int getFrequentRenterPoints (int daysRented) { // const
         return 1;}}
@@ -29,30 +32,21 @@ class RegularPrice extends Price {
         double result = 2;
         if (daysRented > 2)
             result += (daysRented - 2) * 1.5;
-        return result;}
-
-    public Price getPriceCode () { // const, not used
-        return Movie.REGULAR;}}
+        return result;}}
 
 class NewReleasePrice extends Price {
     public double getCharge (int daysRented) { // const
         return daysRented * 3;}
 
     public int getFrequentRenterPoints (int daysRented) { // const
-        return (daysRented > 1) ? 2 : 1;}
-
-    public Price getPriceCode () { // const, not used
-        return Movie.NEW_RELEASE;}}
+        return (daysRented > 1) ? 2 : 1;}}
 
 class ChildrensPrice extends Price {
     public double getCharge (int daysRented) { // const
         double result = 1.5;
         if (daysRented > 3)
             result += (daysRented - 3) * 1.5;
-        return result;}
-
-    public Price getPriceCode () { // const, not used
-        return Movie.CHILDRENS;}}
+        return result;}}
 
 class Movie {
     public static final Price REGULAR     = new RegularPrice();
@@ -64,7 +58,7 @@ class Movie {
 
     public Movie (String title, Price price) {
         _title = title;
-        setPriceCode(price);}
+        setPrice(price);}
 
     /**
      * _price
@@ -80,17 +74,10 @@ class Movie {
     public int getFrequentRenterPoints (int daysRented) { // const
         return _price.getFrequentRenterPoints(daysRented);}
 
-    /**
-     * _price
-     *     getPriceCode()
-     */
-    public Price getPriceCode () { // const // not needed
-        return _price.getPriceCode();}
-
     public String getTitle () { // const
         return _title;}
 
-    public void setPriceCode (Price price) {
+    public void setPrice (Price price) {
         _price = price;}}
 
 class Rental {
@@ -108,7 +95,7 @@ class Rental {
     public double getCharge () { // const
         return _movie.getCharge(_daysRented);}
 
-    public int getDaysRented () { // const // not used
+    public int getDaysRented () { // const // no longer used
         return _daysRented;}
 
     /**

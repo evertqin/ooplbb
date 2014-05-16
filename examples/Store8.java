@@ -5,13 +5,9 @@
 /*
 Change Price to an interface
 Create AbstractPrice
-Change Movie.Movie() to take a Price instead of a price code
-Remove Movie.setPriceCode()
-Remove Movie.getPriceCode()
 Remove Movie.REGULAR
 Remove Movie.NEW_RELEASE
 Remove Movie.CHILDRENS
-Remove Rental.getDaysRented()
 */
 
 import java.util.Enumeration;
@@ -26,21 +22,21 @@ abstract class AbstractPrice implements Price {
         return 1;}}
 
 class RegularPrice extends AbstractPrice {
-    public double getCharge (int daysRented) { // const
+    final public double getCharge (int daysRented) { // const
         double result = 2;
         if (daysRented > 2)
             result += (daysRented - 2) * 1.5;
         return result;}}
 
 class NewReleasePrice extends AbstractPrice {
-    public double getCharge (int daysRented) { // const
+    final public double getCharge (int daysRented) { // const
         return daysRented * 3;}
 
     public int getFrequentRenterPoints (int daysRented) { // const
         return (daysRented > 1) ? 2 : 1;}}
 
 class ChildrensPrice extends AbstractPrice {
-    public double getCharge (int daysRented) { // const
+    final public double getCharge (int daysRented) { // const
         double result = 1.5;
         if (daysRented > 3)
             result += (daysRented - 3) * 1.5;
@@ -52,7 +48,7 @@ class Movie {
 
     public Movie (String title, Price price) {
         _title = title;
-        _price = price;}
+        setPrice(price);}
 
     /**
      * _price
@@ -69,7 +65,10 @@ class Movie {
         return _price.getFrequentRenterPoints(daysRented);}
 
     public String getTitle () { // const
-        return _title;}}
+        return _title;}
+
+    public void setPrice (Price price) {
+        _price = price;}}
 
 class Rental {
     private Movie _movie;
@@ -92,6 +91,9 @@ class Rental {
      */
     public int getFrequentRenterPoints () { // const
         return _movie.getFrequentRenterPoints(_daysRented);}
+
+    public int getDaysRented () { // const // no longer used
+        return _daysRented;}
 
     public Movie getMovie () { // const
         return _movie;}}
