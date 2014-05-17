@@ -18,7 +18,7 @@ class A implements Cloneable {
 
     public A () {
         a = new int[10];
-		Arrays.fill(a, 2);}
+        Arrays.fill(a, 2);}
 
     public Object clone () {
         try {
@@ -30,26 +30,26 @@ class A implements Cloneable {
             return null;}}}
 
 final class B extends A
-	{}
+    {}
 
 final class Clone {
     public static void main (String[] args) {
         System.out.println("Clone.java");
 
-		{
-		final A x = new A();
-		final A y = (A) x.clone();
-		assert x   != y;
-		assert x.a != y.a;
+        {
+        final A x = new A();
+        final A y = (A) x.clone();
+        assert x   != y;
+        assert x.a != y.a;
         assert Arrays.equals(x.a, y.a);
-		}
+        }
 
-		{
-		final B x = new B();
-		final B y = (B) x.clone();
-		assert x   != y;
-		assert x.a != y.a;
+        {
+        final B x = new B();
+        final B y = (B) x.clone();
+        assert x   != y;
+        assert x.a != y.a;
         assert Arrays.equals(x.a, y.a);
-		}
+        }
 
         System.out.println("Done.");}}
