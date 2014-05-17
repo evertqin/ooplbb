@@ -2,6 +2,8 @@
 // Decorator.java
 // --------------
 
+// http://en.wikipedia.org/wiki/Decorator_pattern
+
 interface PizzaInterface {
 	int getCost ();}
 
