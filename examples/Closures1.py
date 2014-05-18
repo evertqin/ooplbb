@@ -4,7 +4,7 @@
 # Closures.py
 # -----------
 
-print("Closures.py")
+print("Closures1.py")
 
 class A :
     def __init__ (self) :
