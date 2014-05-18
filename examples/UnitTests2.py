@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
-# ------------
-# UnitTests.py
-# ------------
+# -------------
+# UnitTests2.py
+# -------------
 
-from unittest import main, TestCase
+from unittest import TestCase, TestLoader, TestSuite, TextTestRunner
 
 def cycle_length (n) :
     assert n > 0
@@ -28,7 +28,9 @@ class UnitTests (TestCase) :
     def test_3 (self) :
         self.assertEqual(cycle_length(10), 7)
 
-main()
+s = TestSuite()
+s.addTest(TestLoader().loadTestsFromTestCase(UnitTests))
+TextTestRunner().run(s)
 
 """
 FFF
@@ -36,9 +38,9 @@ FFF
 FAIL: test_1 (__main__.UnitTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "./UnitTests.py", line 23, in test_1
+  File "UnitTests2.py", line 23, in test_1
     self.assertEqual(cycle_length( 1), 1)
-  File "./UnitTests.py", line 18, in cycle_length
+  File "UnitTests2.py", line 18, in cycle_length
     assert c > 0
 AssertionError
 
@@ -46,7 +48,7 @@ AssertionError
 FAIL: test_2 (__main__.UnitTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "./UnitTests.py", line 26, in test_2
+  File "UnitTests2.py", line 26, in test_2
     self.assertEqual(cycle_length( 5), 6)
 AssertionError: 5 != 6
 
@@ -54,7 +56,7 @@ AssertionError: 5 != 6
 FAIL: test_3 (__main__.UnitTests)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "./UnitTests.py", line 29, in test_3
+  File "UnitTests2.py", line 29, in test_3
     self.assertEqual(cycle_length(10), 7)
 AssertionError: 6 != 7
 
