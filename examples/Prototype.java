@@ -7,17 +7,6 @@
 import java.util.ArrayList;
 import java.util.List;
 
-/*
-interface Cloneable {}
-
-class Object {
-    protected Object clone () throws CloneNotSupportedException {
-        if (!(this instanceof Cloneable))
-            throw new CloneNotSupportedException();
-        // ...magic...
-        }
-*/
-
 class Room implements Cloneable {
     public Room clone () {
         try {

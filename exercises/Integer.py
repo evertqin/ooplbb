@@ -17,19 +17,19 @@ class UnitTests (TestCase) :
         self.p = iter(self.x)
 
     def test_1 (self) :
-        self.assertTrue(iter(self.p) is self.p)
+        self.assertIs(iter(self.p), self.p)
 
     def test_2 (self) :
-        self.assertTrue(next(self.p) == 4)
+        self.assertEqual(next(self.p), 4)
 
     def test_3 (self) :
         next(self.p)
-        self.assertTrue(next(self.p) == 3)
+        self.assertEqual(next(self.p), 3)
 
     def test_4 (self) :
         next(self.p)
         next(self.p)
-        self.assertTrue(next(self.p) == 2)
+        self.assertEqual(next(self.p), 2)
 
     def test_5 (self) :
         next(self.p)
@@ -41,9 +41,9 @@ class UnitTests (TestCase) :
             pass
 
     def test_6 (self) :
-        self.assertTrue(sum(self.x) == 9)
+        self.assertEqual(sum(self.x), 9)
 
     def test_7 (self) :
-        self.assertTrue(sum(self.p) == 9)
+        self.assertEqual(sum(self.p), 9)
 
 main()

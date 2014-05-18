@@ -20,16 +20,16 @@ def sum_reduce (a) :
 def bind (my_sum) :
     class UnitTests (TestCase) :
         def test_1 (self) :
-            self.assertTrue(my_sum([]) == 0)
+            self.assertEqual(my_sum([]), 0)
 
         def test_2 (self) :
-            self.assertTrue(my_sum([2]) == 2)
+            self.assertEqual(my_sum([2]), 2)
 
         def test_3 (self) :
-            self.assertTrue(my_sum([2, 3]) == 5)
+            self.assertEqual(my_sum([2, 3]), 5)
 
         def test_4 (self) :
-            self.assertTrue(my_sum([2, 3, 4]) == 9)
+            self.assertEqual(my_sum([2, 3, 4]), 9)
     return UnitTests
 
 s = TestSuite()

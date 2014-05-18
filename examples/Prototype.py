@@ -6,7 +6,7 @@
 
 # http://en.wikipedia.org/wiki/Prototype_pattern
 
-import copy
+from copy import copy
 
 class Room () :
     pass
@@ -45,10 +45,10 @@ class MazePrototype () :
         self.__door = door
 
     def make_room (self) :
-        return copy.copy(self.__room)
+        return copy(self.__room)
 
     def make_door (self, r, s) :
-        d = copy.copy(self.__door)
+        d = copy(self.__door)
         d.set(r, s)
         return d
 
