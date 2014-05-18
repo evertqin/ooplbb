@@ -5,9 +5,6 @@
 /*
 Change Price to an interface
 Create AbstractPrice
-Remove Movie.REGULAR
-Remove Movie.NEW_RELEASE
-Remove Movie.CHILDRENS
 */
 
 import java.util.Enumeration;
@@ -43,6 +40,10 @@ class ChildrensPrice extends AbstractPrice {
         return result;}}
 
 class Movie {
+    public static final Price REGULAR     = new RegularPrice();
+    public static final Price NEW_RELEASE = new NewReleasePrice();
+    public static final Price CHILDRENS   = new ChildrensPrice();
+
     private String _title;
     private Price  _price;
 
