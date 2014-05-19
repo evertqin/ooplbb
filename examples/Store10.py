@@ -5,14 +5,12 @@
 # ----------
 
 """
-Remove singleton.
-Use globals().
-Rename get_charge()               to get_amount().
+Use globals()
+Rename get_charge()               to get_amount()
 Rename get_frequent_renter_points to get_points()
-Change get_amount(), get_points(), and get_output() to static methods in Price.
 """
 
-class Price (object) :
+class Price :
     def get_points (self, days_rented) : # const
         return 1
 
@@ -37,15 +35,14 @@ class ChildrensPrice (Price) :
             result += (days_rented - 3) * 1.5
         return result
 
-class Movie (object) :
+class Movie :
+    REGULAR     = "RegularPrice"
+    NEW_RELEASE = "NewReleasePrice"
+    CHILDRENS   = "ChildrensPrice"
+
     def __init__ (self, title, price) :
         self.title = title
-        try :
-            self.price = globals()[price]()
-        except KeyError as e:
-            print(e.args)
-        except TypeError as e:
-            print(e.args)
+        self.set_price(price)
 
     """
     price
@@ -64,7 +61,18 @@ class Movie (object) :
     def get_output (self, days_rented) : # const
         return "\t" + self.title + "\t" + str(self.get_amount(days_rented)) + "\n"
 
-class Rental (object) :
+    def get_title (self) : # const
+        return self.title
+
+    def set_price (self, price) :
+        try :
+            self.price = globals()[price]()
+        except KeyError as e:
+            print(e.args)
+        except TypeError as e:
+            print(e.args)
+
+class Rental :
     def __init__ (self, movie, days_rented) :
         self.movie       = movie
         self.days_rented = days_rented
@@ -76,21 +84,27 @@ class Rental (object) :
     def get_amount (self) : # const
         return self.movie.get_amount(self.days_rented)
 
+    def get_days_rented (self) : # const # no longer used
+        return self.days_rented
+
     """
-    movie()
+    movie
         get_points()
     """
     def get_points (self) : # const
         return self.movie.get_points(self.days_rented)
 
+    def get_movie (self) : # const
+        return self.movie
+
     """
-    movie()
+    movie
         get_output()
     """
     def get_output (self) : # const
         return self.movie.get_output(self.days_rented)
 
-class Customer (object) :
+class Customer :
     def __init__ (self, name) :
         self.name    = name
         self.rentals = []
@@ -124,14 +138,14 @@ assert (x.statement() ==                    \
     "Amount owed is 0\n"                  + \
     "You earned 0 frequent renter points")
 
-x.add_rental(Rental(Movie("Shane", "RegularPrice"), 2))
+x.add_rental(Rental(Movie("Shane", Movie.REGULAR), 2))
 assert (x.statement() ==                    \
     "Rental Record for Penelope\n"        + \
     "\tShane\t2\n"                        + \
     "Amount owed is 2\n"                  + \
     "You earned 1 frequent renter points")
 
-x.add_rental(Rental(Movie("Red River", "RegularPrice"), 5))
+x.add_rental(Rental(Movie("Red River", Movie.REGULAR), 5))
 assert (x.statement() ==                    \
     "Rental Record for Penelope\n"        + \
     "\tShane\t2\n"                        + \
@@ -139,7 +153,7 @@ assert (x.statement() ==                    \
     "Amount owed is 8.5\n"                + \
     "You earned 2 frequent renter points")
 
-x.add_rental(Rental(Movie("Giant", "NewReleasePrice"), 1))
+x.add_rental(Rental(Movie("Giant", Movie.NEW_RELEASE), 1))
 assert (x.statement() ==                    \
     "Rental Record for Penelope\n"        + \
     "\tShane\t2\n"                        + \
@@ -148,7 +162,7 @@ assert (x.statement() ==                    \
     "Amount owed is 11.5\n"               + \
     "You earned 3 frequent renter points")
 
-x.add_rental(Rental(Movie("2001", "NewReleasePrice"), 3))
+x.add_rental(Rental(Movie("2001", Movie.NEW_RELEASE), 3))
 assert (x.statement() ==                    \
     "Rental Record for Penelope\n"        + \
     "\tShane\t2\n"                        + \
@@ -158,7 +172,7 @@ assert (x.statement() ==                    \
     "Amount owed is 20.5\n"               + \
     "You earned 5 frequent renter points")
 
-x.add_rental(Rental(Movie("Big Country", "ChildrensPrice"), 3))
+x.add_rental(Rental(Movie("Big Country", Movie.CHILDRENS), 3))
 assert (x.statement() ==                    \
     "Rental Record for Penelope\n"        + \
     "\tShane\t2\n"                        + \
@@ -169,7 +183,7 @@ assert (x.statement() ==                    \
     "Amount owed is 22.0\n"               + \
     "You earned 6 frequent renter points")
 
-x.add_rental(Rental(Movie("Spartacus", "ChildrensPrice"), 5))
+x.add_rental(Rental(Movie("Spartacus", Movie.CHILDRENS), 5))
 assert (x.statement() ==                    \
     "Rental Record for Penelope\n"        + \
     "\tShane\t2\n"                        + \

@@ -15,7 +15,7 @@ Replace Temp with Query (120)
 Changed thisAmount to each.get_charge()
 """
 
-class Movie (object) :
+class Movie :
     REGULAR     = 0
     NEW_RELEASE = 1
     CHILDRENS   = 2
@@ -33,7 +33,7 @@ class Movie (object) :
     def set_price_code (self, price_code) :
         self.price_code = price_code
 
-class Rental (object) :
+class Rental :
     def __init__ (self, movie, days_rented) :
         self.movie       = movie
         self.days_rented = days_rented
@@ -66,7 +66,7 @@ class Rental (object) :
     def get_movie (self) : # const
         return self.movie
 
-class Customer (object) :
+class Customer :
     def __init__ (self, name) :
         self.name    = name
         self.rentals = []

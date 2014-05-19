@@ -3,16 +3,12 @@
 // -----------
 
 /*
-Introduce eager Singleton
 Create Movie.getOutput()
-Remove Movie.getTitle()
 Create Rental.getOutput()
-Remove Rental.getMovie()
 Remove Customer.getTotalCharge()
 Remove Customer.getTotalFrequentRenterPoints()
 */
 
-import java.util.Enumeration;
 import java.util.Vector;
 
 interface Price {
@@ -24,48 +20,37 @@ abstract class AbstractPrice implements Price {
         return 1;}}
 
 class RegularPrice extends AbstractPrice {
-    public static final RegularPrice only = new RegularPrice();
-
-    private RegularPrice ()
-        {}
-
-    public double getCharge (int daysRented) { // const
+    public final double getCharge (int daysRented) { // const
         double result = 2;
         if (daysRented > 2)
             result += (daysRented - 2) * 1.5;
         return result;}}
 
 class NewReleasePrice extends AbstractPrice {
-    public static final NewReleasePrice only = new NewReleasePrice();
-
-    private NewReleasePrice ()
-        {}
-
-    public double getCharge (int daysRented) { // const
+    public final double getCharge (int daysRented) { // const
         return daysRented * 3;}
 
-    public int getFrequentRenterPoints (int daysRented) { // const
+    public final int getFrequentRenterPoints (int daysRented) { // const
         return (daysRented > 1) ? 2 : 1;}}
 
 class ChildrensPrice extends AbstractPrice {
-    public static final ChildrensPrice only = new ChildrensPrice();
-
-    private ChildrensPrice ()
-        {}
-
-    public double getCharge (int daysRented) { // const
+    public final double getCharge (int daysRented) { // const
         double result = 1.5;
         if (daysRented > 3)
             result += (daysRented - 3) * 1.5;
         return result;}}
 
 class Movie {
+    public static final Price REGULAR     = new RegularPrice();
+    public static final Price NEW_RELEASE = new NewReleasePrice();
+    public static final Price CHILDRENS   = new ChildrensPrice();
+
     private String _title;
     private Price  _price;
 
     public Movie (String title, Price price) {
         _title = title;
-        _price = price;}
+        setPrice(price);}
 
     /**
      * _price
@@ -84,7 +69,13 @@ class Movie {
     public String getOutput (int daysRented) { // const
         return
             "\t" + _title                                +
-            "\t" + String.valueOf(getCharge(daysRented)) + "\n";}}
+            "\t" + String.valueOf(getCharge(daysRented)) + "\n";}
+
+    public String getTitle () { // const
+        return _title;}
+
+    public void setPrice (Price price) {
+        _price = price;}}
 
 class Rental {
     private Movie _movie;
@@ -101,12 +92,18 @@ class Rental {
     public double getCharge () { // const
         return _movie.getCharge(_daysRented);}
 
+    public int getDaysRented () { // const // no longer used
+        return _daysRented;}
+
     /**
      * _movie
      *     getFrequentRenterPoints()
      */
     public int getFrequentRenterPoints () { // const
         return _movie.getFrequentRenterPoints(_daysRented);}
+
+    public Movie getMovie () { // const
+        return _movie;}
 
     /**
      * _movie
@@ -141,7 +138,7 @@ class Customer {
         int points = 0;
         for (Rental rental : _rentals)
             points += rental.getFrequentRenterPoints();
-        String result = "Rental Record for " + _name + "\n";
+        String result = "Rental Record for " + getName() + "\n";
         for (Rental rental : _rentals)
             result += rental.getOutput();
         result += "Amount owed is " + String.valueOf(amount) + "\n";
@@ -158,14 +155,14 @@ final class Store9 {
             "Amount owed is 0.0\n"         +
             "You earned 0 frequent renter points");
 
-        x.addRental(new Rental(new Movie("Shane", RegularPrice.only), 2));
+        x.addRental(new Rental(new Movie("Shane", Movie.REGULAR), 2));
         assert x.statement().equals(
             "Rental Record for Penelope\n" +
             "\tShane\t2.0\n"               +
             "Amount owed is 2.0\n"         +
             "You earned 1 frequent renter points");
 
-        x.addRental(new Rental(new Movie("Red River", RegularPrice.only), 5));
+        x.addRental(new Rental(new Movie("Red River", Movie.REGULAR), 5));
         assert x.statement().equals(
             "Rental Record for Penelope\n" +
             "\tShane\t2.0\n"               +
@@ -173,7 +170,7 @@ final class Store9 {
             "Amount owed is 8.5\n"         +
             "You earned 2 frequent renter points");
 
-        x.addRental(new Rental(new Movie("Giant", NewReleasePrice.only), 1));
+        x.addRental(new Rental(new Movie("Giant", Movie.NEW_RELEASE), 1));
         assert x.statement().equals(
             "Rental Record for Penelope\n" +
             "\tShane\t2.0\n"               +
@@ -182,7 +179,7 @@ final class Store9 {
             "Amount owed is 11.5\n"        +
             "You earned 3 frequent renter points");
 
-        x.addRental(new Rental(new Movie("2001", NewReleasePrice.only), 3));
+        x.addRental(new Rental(new Movie("2001", Movie.NEW_RELEASE), 3));
         assert x.statement().equals(
             "Rental Record for Penelope\n" +
             "\tShane\t2.0\n"               +
@@ -192,7 +189,7 @@ final class Store9 {
             "Amount owed is 20.5\n"        +
             "You earned 5 frequent renter points");
 
-        x.addRental(new Rental(new Movie("Big Country", ChildrensPrice.only), 3));
+        x.addRental(new Rental(new Movie("Big Country", Movie.CHILDRENS), 3));
         assert x.statement().equals(
             "Rental Record for Penelope\n" +
             "\tShane\t2.0\n"               +
@@ -203,7 +200,7 @@ final class Store9 {
             "Amount owed is 22.0\n"        +
             "You earned 6 frequent renter points");
 
-        x.addRental(new Rental(new Movie("Spartacus", ChildrensPrice.only), 5));
+        x.addRental(new Rental(new Movie("Spartacus", Movie.CHILDRENS), 5));
         assert x.statement().equals(
             "Rental Record for Penelope\n" +
             "\tShane\t2.0\n"               +

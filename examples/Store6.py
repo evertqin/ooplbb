@@ -16,7 +16,7 @@ Create Price.get_charge()
 Create Price.get_frequent_renter_points()
 """
 
-class Price (object) :
+class Price :
     def get_frequent_renter_points (self, days_rented) : # const
         return 1
 
@@ -34,7 +34,7 @@ class NewReleasePrice (Price) :
     def get_charge (self, days_rented) : # const
         return days_rented * 3
 
-    def get_frequent_renter_points (self, days_rented) :
+    def get_frequent_renter_points (self, days_rented) : # const
         return 2 if (days_rented > 1) else 1
 
     def get_price_code () :      # const, not used
@@ -50,7 +50,7 @@ class ChildrensPrice (Price) :
     def get_price_code () :    # const, not used
         return Movie.CHILDRENS
 
-class Movie (object) :
+class Movie :
     REGULAR     = 0
     NEW_RELEASE = 1
     CHILDRENS   = 2
@@ -89,7 +89,7 @@ class Movie (object) :
         else :
             raise ValueError("Incorrect Price Code")
 
-class Rental (object) :
+class Rental :
     def __init__ (self, movie, days_rented) :
         self.movie       = movie
         self.days_rented = days_rented
@@ -114,7 +114,7 @@ class Rental (object) :
     def get_movie (self) : # const
         return self.movie
 
-class Customer (object) :
+class Customer :
     def __init__ (self, name) :
         self.name    = name
         self.rentals = []

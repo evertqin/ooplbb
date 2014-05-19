@@ -7,7 +7,6 @@ Change Price to an interface
 Create AbstractPrice
 */
 
-import java.util.Enumeration;
 import java.util.Vector;
 
 interface Price {
@@ -19,21 +18,21 @@ abstract class AbstractPrice implements Price {
         return 1;}}
 
 class RegularPrice extends AbstractPrice {
-    final public double getCharge (int daysRented) { // const
+    public final double getCharge (int daysRented) { // const
         double result = 2;
         if (daysRented > 2)
             result += (daysRented - 2) * 1.5;
         return result;}}
 
 class NewReleasePrice extends AbstractPrice {
-    final public double getCharge (int daysRented) { // const
+    public final double getCharge (int daysRented) { // const
         return daysRented * 3;}
 
-    public int getFrequentRenterPoints (int daysRented) { // const
+    public final int getFrequentRenterPoints (int daysRented) { // const
         return (daysRented > 1) ? 2 : 1;}}
 
 class ChildrensPrice extends AbstractPrice {
-    final public double getCharge (int daysRented) { // const
+    public final double getCharge (int daysRented) { // const
         double result = 1.5;
         if (daysRented > 3)
             result += (daysRented - 3) * 1.5;
@@ -86,15 +85,15 @@ class Rental {
     public double getCharge () { // const
         return _movie.getCharge(_daysRented);}
 
+    public int getDaysRented () { // const // no longer used
+        return _daysRented;}
+
     /**
      * _movie
      *     getFrequentRenterPoints()
      */
     public int getFrequentRenterPoints () { // const
         return _movie.getFrequentRenterPoints(_daysRented);}
-
-    public int getDaysRented () { // const // no longer used
-        return _daysRented;}
 
     public Movie getMovie () { // const
         return _movie;}}
@@ -163,14 +162,14 @@ final class Store8 {
             "Amount owed is 0.0\n"         +
             "You earned 0 frequent renter points");
 
-        x.addRental(new Rental(new Movie("Shane", new RegularPrice()), 2));
+        x.addRental(new Rental(new Movie("Shane", Movie.REGULAR), 2));
         assert x.statement().equals(
             "Rental Record for Penelope\n" +
             "\tShane\t2.0\n"               +
             "Amount owed is 2.0\n"         +
             "You earned 1 frequent renter points");
 
-        x.addRental(new Rental(new Movie("Red River", new RegularPrice()), 5));
+        x.addRental(new Rental(new Movie("Red River", Movie.REGULAR), 5));
         assert x.statement().equals(
             "Rental Record for Penelope\n" +
             "\tShane\t2.0\n"               +
@@ -178,7 +177,7 @@ final class Store8 {
             "Amount owed is 8.5\n"         +
             "You earned 2 frequent renter points");
 
-        x.addRental(new Rental(new Movie("Giant", new NewReleasePrice()), 1));
+        x.addRental(new Rental(new Movie("Giant", Movie.NEW_RELEASE), 1));
         assert x.statement().equals(
             "Rental Record for Penelope\n" +
             "\tShane\t2.0\n"               +
@@ -187,7 +186,7 @@ final class Store8 {
             "Amount owed is 11.5\n"        +
             "You earned 3 frequent renter points");
 
-        x.addRental(new Rental(new Movie("2001", new NewReleasePrice()), 3));
+        x.addRental(new Rental(new Movie("2001", Movie.NEW_RELEASE), 3));
         assert x.statement().equals(
             "Rental Record for Penelope\n" +
             "\tShane\t2.0\n"               +
@@ -197,7 +196,7 @@ final class Store8 {
             "Amount owed is 20.5\n"        +
             "You earned 5 frequent renter points");
 
-        x.addRental(new Rental(new Movie("Big Country", new ChildrensPrice()), 3));
+        x.addRental(new Rental(new Movie("Big Country", Movie.CHILDRENS), 3));
         assert x.statement().equals(
             "Rental Record for Penelope\n" +
             "\tShane\t2.0\n"               +
@@ -208,7 +207,7 @@ final class Store8 {
             "Amount owed is 22.0\n"        +
             "You earned 6 frequent renter points");
 
-        x.addRental(new Rental(new Movie("Spartacus", new ChildrensPrice()), 5));
+        x.addRental(new Rental(new Movie("Spartacus", Movie.CHILDRENS), 5));
         assert x.statement().equals(
             "Rental Record for Penelope\n" +
             "\tShane\t2.0\n"               +
