@@ -22,9 +22,9 @@
 
 """ ----------------------------------------------------------------------
 Define:
-	collatz_read()
-	collatz_eval()
-	collatz_print()
+    collatz_read()
+    collatz_eval()
+    collatz_print()
 """
 
 from sys import stdin, stdout
