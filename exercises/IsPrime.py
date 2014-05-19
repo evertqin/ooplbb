@@ -48,8 +48,10 @@ Ran 5 tests in 0.000s
 
 OK
 
+
+
 % coverage report -m
 Name      Stmts   Miss Branch BrMiss  Cover   Missing
 -----------------------------------------------------
-IsPrime      24      3      6      3    80%   17-18, 39
+IsPrime      24      3      6      3    80%   21-22, 43
 """
