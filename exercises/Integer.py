@@ -35,10 +35,7 @@ class UnitTests (TestCase) :
         next(self.p)
         next(self.p)
         next(self.p)
-        try :
-            next(self.p)
-        except StopIteration :
-            pass
+        self.assertRaises(StopIteration, next, self.p)
 
     def test_6 (self) :
         self.assertEqual(sum(self.x), 9)
