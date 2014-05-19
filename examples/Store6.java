@@ -10,8 +10,7 @@ Create Price
 Create RegularPrice
 Create NewReleasePrice
 Create ChildrensPrice
-Create Price.getCharge()
-Create Price.getFrequentRenterPoints()
+Rename Move.setPriceCode() to Movie.setPrice()
 */
 
 import java.util.Enumeration;
@@ -64,7 +63,7 @@ class Movie {
 
     public Movie (String title, int priceCode) {
         _title = title;
-        setPriceCode(priceCode);}
+        setPriced(priceCode);}
 
     /**
      * _price
@@ -90,7 +89,7 @@ class Movie {
     public String getTitle () { // const
         return _title;}
 
-    public void setPriceCode (int priceCode) {
+    public void setPriced (int priceCode) {
         switch (priceCode) {                                                   // used once, still have a switch!
             case Movie.REGULAR:
                 _price = new RegularPrice();

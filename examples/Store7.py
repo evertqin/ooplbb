@@ -5,19 +5,9 @@
 # ---------
 
 """
-Replace Type Code with State/Strategy (227)
 Remove Price.get_price_code()
 Change Movie.__init__() to take a Price instead of a price code
-Remove Move.get_price_code()
-Rename Move.set_price_code() to Movie.set_price()
-Move Method(142)
-Replace Conditional with Polymorphism (225)
-Create Price
-Create RegularPrice
-Create NewReleasePrice
-Create ChildrensPrice
-Create Price.get_charge()
-Create Price.get_frequent_renter_points()
+Remove Movie.get_price_code()
 """
 
 class Price :

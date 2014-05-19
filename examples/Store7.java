@@ -3,19 +3,9 @@
 // -----------
 
 /*
-Replace Type Code with State/Strategy (227)
 Remove Price.getPriceCode()
 Change Movie.Movie() to take a Price instead of a price code
 Remove Move.getPriceCode()
-Rename Move.setPriceCode() to Movie.setPrice()
-Move Method(142)
-Replace Conditional with Polymorphism (225)
-Create Price
-Create RegularPrice
-Create NewReleasePrice
-Create ChildrensPrice
-Create Price.getCharge()
-Create Price.getFrequentRenterPoints()
 */
 
 import java.util.Enumeration;

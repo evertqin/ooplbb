@@ -12,8 +12,7 @@ Create Price
 Create RegularPrice
 Create NewReleasePrice
 Create ChildrensPrice
-Create Price.get_charge()
-Create Price.get_frequent_renter_points()
+Rename Movie.set_price_code() to Movie.set_price()
 """
 
 class Price :
@@ -57,7 +56,7 @@ class Movie :
 
     def __init__ (self, title, price_code) :
         self.title = title
-        self.set_price_code(price_code)
+        self.set_price(price_code)
 
     """
     price
@@ -79,8 +78,8 @@ class Movie :
     def get_title (self) : # const
         return self.title
 
-    def set_price_code (self, price_code) :
-        if price_code == Movie.REGULAR :       # used once, still have a switch!
+    def set_price (self, price_code) :
+        if price_code == Movie.REGULAR :             # used once, still have a switch!
             self.price = RegularPrice()
         elif price_code == Movie.NEW_RELEASE :
             self.price = NewReleasePrice()
