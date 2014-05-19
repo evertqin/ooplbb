@@ -32,7 +32,6 @@ class UnitTests (TestCase) :
         self.assertEqual(p.cost(), 10)
         self.assertEqual(str(p), "Sausage Cheese Pizza")
 
-
     def test_4 (self) :
         p = CheesePizzaDecorator(SausagePizzaDecorator(CheesePizzaDecorator(Pizza())))
         self.assertEqual(p.cost(), 11)
