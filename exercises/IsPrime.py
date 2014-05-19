@@ -7,7 +7,7 @@
 """ ----------------------------------------------------------------------
 There's a bug in the tests.
 There's a bug in the code.
-Find them, fix them, and improve the coverage
+Find them, fix them, and improve the coverage.
 """
 
 from math     import sqrt
